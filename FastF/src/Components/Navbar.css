@@ -1,0 +1,69 @@
+.g-red{
+    background-color: red;
+}
+.navbar{
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 50px;
+    color: white;
+    justify-items: center;
+}
+.nb{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+.gap{
+    gap: 30px;
+    display: flex;
+}
+.body{ font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 50px;
+    color: white;
+    justify-items: center;;
+
+}
+.text-gradient{
+    background: linear-gradient(to bottom,#ffffff,#898989);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color:transparent;
+}
+
+.char {
+  display: inline-block;
+  transform: translateY(10%);
+}
+.text{
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    color: white;
+    justify-content: center;
+}
+.text1{
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    color: white;
+    justify-content: center;
+}
+.background{
+  height: 100vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url("./assets/bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+
