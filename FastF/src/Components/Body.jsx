@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 function Body() {
   const titleRef = useRef(null);
   const imgRef = useRef(null);
+  const revealTextRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -30,17 +31,33 @@ function Body() {
       gsap.fromTo(".text", { opacity: 0 }, { opacity: 1, duration: 2, delay: 0.75 });
       gsap.fromTo(".text1", { opacity: 0 }, { opacity: 1, duration: 2, delay: 1 });
 
-      // IMAGE SCROLL MINIMIZE
-      gsap.to(imgRef.current, {
-     scale: 0.5,
-  transformOrigin: "right center",
-  scrollTrigger: {
-    trigger: imgRef.current,
-    start: "top center",
-    end: "bottom top",
-    scrub: true,
+      // Image shrinks and supporting text appears during scroll
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".image-text-row",
+          start: "top 70%",
+          end: "+=500",
+          scrub: 1.2,
         },
       });
+
+      timeline
+        .to(
+          imgRef.current,
+          {
+            scale: 0.7,
+            x: -180,
+            transformOrigin: "center center",
+            ease: "none",
+          },
+          0
+        )
+        .fromTo(
+          revealTextRef.current,
+          { autoAlpha: 0, x: 90 },
+          { autoAlpha: 1, x: 0, ease: "none" },
+          0
+        );
     });
 
     return () => ctx.revert();
@@ -58,15 +75,26 @@ function Body() {
 
       <p className="text">This, is no ordinary sport.</p>
       <p className="text1">THIS IS FORMULA 1.</p>
-    <div style={{display:"flex"}}>
-      <img
-        ref={imgRef}
-        src={about}
-        alt="Formula 1"
-        className="hero-img"
-        style={{borderRadius:"30px"}}
-      />
-    </div>
+
+      <div className="image-section">
+        <div className="image-text-row">
+          <img
+            ref={imgRef}
+            src={about}
+            alt="Formula 1"
+            className="hero-img"
+            style={{ borderRadius: "30px" }}
+          />
+
+          <div ref={revealTextRef} className="scroll-reveal-text">
+            <h2 className="text-gradient">The speed. The drama. The precision.</h2>
+            <p>
+              As the car comes into focus, the story behind Formula 1 appears:
+              engineering, rivalry, and relentless performance.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
