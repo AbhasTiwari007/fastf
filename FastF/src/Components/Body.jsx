@@ -9,7 +9,6 @@ gsap.registerPlugin(ScrollTrigger);
 function Body() {
   const titleRef = useRef(null);
   const imgRef = useRef(null);
-  const showcaseRef = useRef(null);
   const revealTextRef = useRef(null);
 
   useEffect(() => {
@@ -32,51 +31,31 @@ function Body() {
       gsap.fromTo(".text", { opacity: 0 }, { opacity: 1, duration: 2, delay: 0.75 });
       gsap.fromTo(".text1", { opacity: 0 }, { opacity: 1, duration: 2, delay: 1 });
 
-      const revealItems = revealTextRef.current?.querySelectorAll(".reveal-item");
-
-      const heroTimeline = gsap.timeline({
+      // Image shrinks and supporting text appears during scroll
+      const timeline = gsap.timeline({
         scrollTrigger: {
-          trigger: showcaseRef.current,
-          start: "top top",
-          end: "+=95%",
-          scrub: 1.15,
-          pin: true,
-          anticipatePin: 1,
-        },
-        defaults: {
-          ease: "power3.inOut",
+          trigger: ".image-text-row",
+          start: "top 70%",
+          end: "+=500",
+          scrub: 1.2,
         },
       });
 
-      heroTimeline
+      timeline
         .to(
           imgRef.current,
           {
-            width: "40vw",
-            maxWidth: "480px",
-            xPercent: -34,
-            yPercent: 2,
-            scale: 0.78,
+            scale: 0.7,
+            x: -180,
             transformOrigin: "center center",
-          },
-          0
-        )
-        .to(
-          revealTextRef.current,
-          {
-            autoAlpha: 1,
-            x: 0,
+            ease: "none",
           },
           0
         )
         .fromTo(
-          revealItems,
-          { autoAlpha: 0, y: 14 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            stagger: 0.06,
-          },
+          revealTextRef.current,
+          { autoAlpha: 0, x: 90 },
+          { autoAlpha: 1, x: 0, ease: "none" },
           0
         );
     });
@@ -97,26 +76,25 @@ function Body() {
       <p className="text">This, is no ordinary sport.</p>
       <p className="text1">THIS IS FORMULA 1.</p>
 
-      <section ref={showcaseRef} className="hero-showcase">
-        <div className="hero-stage">
+      <div className="image-section">
+        <div className="image-text-row">
           <img
             ref={imgRef}
             src={about}
             alt="Formula 1"
             className="hero-img"
+            style={{ borderRadius: "30px" }}
           />
 
-          <div ref={revealTextRef} className="hero-reveal">
-            <p className="hero-kicker reveal-item">Speed Reframed</p>
-            <h2 className="hero-heading reveal-item">
-              The car moves. The story appears.
-            </h2>
-            <p className="hero-copy reveal-item">
-              Formula 1 is speed, pressure, and precision revealed in a single motion.
+          <div ref={revealTextRef} className="scroll-reveal-text">
+            <h2 className="text-gradient">The speed. The drama. The precision.</h2>
+            <p>
+              As the car comes into focus, the story behind Formula 1 appears:
+              engineering, rivalry, and relentless performance.
             </p>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

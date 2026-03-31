@@ -1,6 +1,5 @@
 import Navbar from "./Components/Navbar";
 import "./App.css";
-import "./Components/Body";
 import Body from "./Components/Body";
 import Teams from "./Components/Teams";
 import Drivers from "./Components/Drivers";
