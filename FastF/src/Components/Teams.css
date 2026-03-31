@@ -1,0 +1,140 @@
+.teams-section {
+  padding: 24px 24px 80px;
+  color: white;
+}
+
+.teams-heading {
+  max-width: 680px;
+  margin: 0 auto 28px;
+  text-align: center;
+  font-family: "Lexend", sans-serif;
+}
+
+.teams-kicker {
+  margin: 0 0 10px;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #b9b9b9;
+}
+
+.teams-heading h2 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 54px);
+}
+
+.teams-heading p {
+  margin: 14px 0 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.teams-row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(280px, 360px);
+  gap: 18px;
+  overflow-x: auto;
+  padding: 10px 2px 14px;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+}
+
+.team-card {
+  min-height: 280px;
+  padding: 22px;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.14), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
+  scroll-snap-align: start;
+  font-family: "Lexend", sans-serif;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.team-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--team-accent);
+}
+
+.team-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 28px 64px rgba(0, 0, 0, 0.28);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.team-card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.team-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--team-accent);
+  box-shadow: 0 0 18px var(--team-accent);
+}
+
+.team-label {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.team-card h3 {
+  margin: 0 0 22px;
+  font-size: 30px;
+  line-height: 1.08;
+}
+
+.team-meta {
+  display: grid;
+  gap: 16px;
+}
+
+.team-meta p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.team-meta span {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+@media (max-width: 768px) {
+  .teams-section {
+    padding: 16px 16px 56px;
+  }
+
+  .teams-row {
+    grid-auto-columns: minmax(260px, 86vw);
+  }
+
+  .team-card {
+    min-height: 260px;
+    padding: 20px;
+  }
+
+  .team-card h3 {
+    font-size: 26px;
+  }
+}

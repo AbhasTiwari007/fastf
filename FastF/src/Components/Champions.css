@@ -1,0 +1,288 @@
+.champions-section {
+  padding: 0 24px 100px;
+  color: white;
+  --f1-red: #e10600;
+  --panel-border: rgba(255, 255, 255, 0.08);
+  --panel-bg: #111214;
+  --muted: rgba(255, 255, 255, 0.48);
+}
+
+.champions-panel {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 26px;
+  border-radius: 30px;
+  border: 1px solid var(--panel-border);
+  background:
+    radial-gradient(circle at top right, rgba(225, 6, 0, 0.12), transparent 26%),
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.05), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015)),
+    var(--panel-bg);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.26);
+  backdrop-filter: blur(14px);
+  font-family: "Lexend", sans-serif;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.champions-topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.champions-heading h2 {
+  margin: 0;
+  font-size: clamp(2.1rem, 4vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.champions-heading p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.34em;
+  font-size: 0.92rem;
+}
+
+.champions-total {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: var(--f1-red);
+  color: white;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 0 18px 40px rgba(225, 6, 0, 0.24);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, filter 0.28s ease;
+}
+
+.champions-total:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 52px rgba(225, 6, 0, 0.3);
+  filter: saturate(1.08);
+}
+
+.champions-total span:first-child {
+  font-size: 1.4rem;
+}
+
+.champions-search {
+  width: 100%;
+  margin-top: 26px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.05));
+  color: white;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.champions-search::placeholder {
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.champions-search:focus {
+  border-color: rgba(225, 6, 0, 0.45);
+  box-shadow: 0 0 0 3px rgba(225, 6, 0, 0.12);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.065));
+}
+
+.champions-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.champions-filter {
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02));
+  color: white;
+  font: inherit;
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: border-color 0.24s ease, background 0.24s ease, transform 0.24s ease, box-shadow 0.24s ease;
+}
+
+.champions-filter:hover {
+  transform: translateY(-1px);
+  border-color: rgba(225, 6, 0, 0.4);
+  box-shadow: 0 10px 24px rgba(225, 6, 0, 0.08);
+}
+
+.champions-filter-active {
+  background: rgba(225, 6, 0, 0.12);
+  border-color: rgba(225, 6, 0, 0.45);
+}
+
+.champions-count {
+  margin: 16px 0 0;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.84rem;
+}
+
+.champions-count span {
+  color: var(--f1-red);
+}
+
+.champions-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+  scroll-behavior: smooth;
+}
+
+.championship-row {
+  display: grid;
+  grid-template-columns: 84px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  min-height: 88px;
+  padding: 18px 20px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at left center, rgba(225, 6, 0, 0.08), transparent 26%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02));
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.28s ease,
+    background 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.championship-row::after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  right: 0;
+  width: 3px;
+  height: calc(100% - 32px);
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--f1-red), #ff665e);
+  opacity: 0.95;
+  transition: height 0.28s ease, opacity 0.28s ease, box-shadow 0.28s ease;
+}
+
+.championship-row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(225, 6, 0, 0.08), transparent 42%);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  pointer-events: none;
+}
+
+.championship-row:hover {
+  transform: translateY(-3px);
+  border-color: rgba(225, 6, 0, 0.2);
+  background:
+    radial-gradient(circle at left center, rgba(225, 6, 0, 0.12), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.18);
+}
+
+.championship-row:hover::before {
+  opacity: 1;
+}
+
+.championship-row:hover::after {
+  box-shadow: 0 0 18px rgba(225, 6, 0, 0.4);
+}
+
+.championship-year {
+  font-size: 2.3rem;
+  line-height: 1;
+  color: var(--f1-red);
+  letter-spacing: -0.04em;
+  transition: transform 0.28s ease, color 0.28s ease;
+}
+
+.championship-main h3 {
+  margin: 0;
+  font-size: 1.45rem;
+  line-height: 1.08;
+}
+
+.championship-main p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.28s ease;
+}
+
+.championship-meta {
+  padding-right: 10px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.12em;
+  transition: transform 0.28s ease, color 0.28s ease;
+}
+
+.championship-row:hover .championship-year {
+  transform: translateX(2px);
+  color: #ff3b30;
+}
+
+.championship-row:hover .championship-main p {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.championship-row:hover .championship-meta {
+  transform: translateX(-2px);
+  color: #ffd2cf;
+}
+
+@media (max-width: 900px) {
+  .champions-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .champions-section {
+    padding: 0 16px 64px;
+  }
+
+  .champions-panel {
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .champions-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .championship-row {
+    grid-template-columns: 70px 1fr auto;
+    padding: 16px;
+  }
+
+  .championship-year {
+    font-size: 1.9rem;
+  }
+
+  .championship-main h3 {
+    font-size: 1.15rem;
+  }
+}
