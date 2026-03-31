@@ -1,8 +1,8 @@
 import "./Navbar.css";
 function Navbar() {
   return (
-    <nav className="navbar" style={{gap:"60%",display:"flex",marginLeft:"25px",marginTop:"25px"}}>
-       <div style={{fontWeight:"450px"}}>FastF</div>
+    <nav className="navbar">
+       <div className="navbar-brand">FastF</div>
 
       <div className="gap">
         <div><a href="#home" className="nb">Home</a></div>

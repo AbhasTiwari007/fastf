@@ -8,7 +8,15 @@
     font-style: normal;
     font-size: 50px;
     color: white;
-    justify-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 25px;
+}
+.navbar-brand{
+    font-weight: 450;
+    line-height: 1;
 }
 .nb{
     text-decoration: none;
@@ -25,7 +33,8 @@
     font-style: normal;
     font-size: 50px;
     color: white;
-    justify-items: center;;
+    justify-items: center;
+    padding: 0 24px 72px;
 
 }
 .text-gradient{
@@ -56,6 +65,94 @@
     font-size: 20px;
     color: white;
     justify-content: center;
+}
+.hero-showcase{
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-stage{
+  width: min(1200px, 100%);
+  min-height: 80vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-img{
+  width: min(82vw, 980px);
+  max-width: 980px;
+  border-radius: 30px;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.35);
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+  will-change: transform, width;
+}
+
+.hero-reveal{
+  position: absolute;
+  right: 0;
+  width: min(32vw, 360px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(24px);
+  text-align: left;
+  z-index: 1;
+  will-change: transform, opacity;
+}
+
+.hero-kicker{
+  margin: 0 0 14px;
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #d7d7d7;
+}
+
+.hero-heading{
+  margin: 0 0 18px;
+  font-size: clamp(28px, 2.8vw, 42px);
+  line-height: 1.08;
+  color: white;
+}
+
+.hero-copy{
+  margin: 0 0 14px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.reveal-item{
+  will-change: transform, opacity;
+}
+
+@media (max-width: 900px){
+  .body{
+    padding: 0 16px 48px;
+  }
+
+  .hero-stage{
+    min-height: 90vh;
+  }
+
+  .hero-reveal{
+    position: static;
+    width: 100%;
+    max-width: 540px;
+    margin-top: 24px;
+    transform: translateY(30px);
+  }
+
+  .hero-img{
+    width: min(94vw, 760px);
+  }
 }
 .background{
   height: 100vh;
