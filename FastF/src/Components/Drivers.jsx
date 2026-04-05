@@ -1,307 +1,358 @@
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 import "./Drivers.css";
+import alexAlbonPhoto from "../assets/Alex Albon.png";
+import carlosSainzPhoto from "../assets/Carlos Saniz.png";
+import charlesLeclercPhoto from "../assets/Charles Leclerc.png";
+import estebanOconPhoto from "../assets/Esteban Ocon.png";
+import francoColapintoPhoto from "../assets/Franco Colapinto.png";
+import georgeRussellPhoto from "../assets/George Russell.png";
+import kimiAntonelliPhoto from "../assets/Kimi Antonelli.png";
+import landoNorrisPhoto from "../assets/Lando Norris.png";
+import lewisHamiltonPhoto from "../assets/Lewis Hamilton.png";
+import lanceStrollPhoto from "../assets/Lance Stroll.png";
+import maxVerstappenPhoto from "../assets/Max Verstappen.png";
+import oliverBearmanPhoto from "../assets/Oli Bearman.png";
+import oscarPiastriPhoto from "../assets/Oscar Piastri.png";
+import pierreGaslyPhoto from "../assets/Pieere Gasly.png";
+import fernandoAlonsoPhoto from "../assets/Fernando Alonso.png";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const drivers = [
   {
-    name: "Max Verstappen",
-    team: "Red Bull Racing",
+    slug: "max-verstappen",
+    firstName: "Max",
+    lastName: "Verstappen",
     number: "1",
-    country: "Netherlands",
-    accent: "#1e4fff",
-    descriptor: "FORMULA 1 WORLD CHAMPION",
-    badge: "4x World Drivers' Champion",
-    titleYears: ["2021", "2022", "2023", "2024"],
+    nationality: "Dutch",
+    countryCode: "NL",
+    titles: "4 WDC",
+    age: "28",
+    accent: "#3152ff",
+    image: maxVerstappenPhoto,
+    about:
+      "Max Verstappen is Red Bull Racing's benchmark driver, combining relentless race pace with title-winning consistency at the very top of the grid.",
   },
   {
-    name: "Isack Hadjar",
-    team: "Red Bull Racing",
-    number: "6",
-    country: "France",
-    accent: "#1e4fff",
-    descriptor: "NEXT GENERATION CONTENDER",
-    badge: "Current Grid Driver",
-    titleYears: [],
-  },
-  {
-    name: "Charles Leclerc",
-    team: "Ferrari",
+    slug: "charles-leclerc",
+    firstName: "Charles",
+    lastName: "Leclerc",
     number: "16",
-    country: "Monaco",
-    accent: "#ff3b30",
-    descriptor: "SCUDERIA FERRARI LEAD",
-    badge: "Current Grid Driver",
-    titleYears: [],
+    nationality: "Monegasque",
+    countryCode: "MC",
+    titles: "0 WDC",
+    age: "27",
+    accent: "#ff1847",
+    image: charlesLeclercPhoto,
+    about:
+      "Charles Leclerc is Ferrari's Monegasque star, known for explosive qualifying speed, sharp racecraft, and his central role in the Scuderia's future.",
   },
   {
-    name: "Lewis Hamilton",
-    team: "Ferrari",
+    slug: "lewis-hamilton",
+    firstName: "Lewis",
+    lastName: "Hamilton",
     number: "44",
-    country: "United Kingdom",
-    accent: "#ff3b30",
-    descriptor: "FORMULA 1 LEGEND",
-    badge: "7x World Drivers' Champion",
-    titleYears: ["2008", "2014", "2015", "2017", "2018", "2019", "2020"],
+    nationality: "British",
+    countryCode: "GB",
+    titles: "7 WDC",
+    age: "41",
+    accent: "#ff2f46",
+    image: lewisHamiltonPhoto,
+    about:
+      "Lewis Hamilton brings seven world titles, elite experience, and relentless race intelligence as he begins a new chapter in Ferrari red.",
   },
   {
-    name: "George Russell",
-    team: "Mercedes",
-    number: "63",
-    country: "United Kingdom",
-    accent: "#37e3cf",
-    descriptor: "MERCEDES TEAM LEADER",
-    badge: "Current Grid Driver",
-    titleYears: [],
-  },
-  {
-    name: "Kimi Antonelli",
-    team: "Mercedes",
-    number: "12",
-    country: "Italy",
-    accent: "#37e3cf",
-    descriptor: "RISING MERCEDES TALENT",
-    badge: "Current Grid Driver",
-    titleYears: [],
-  },
-  {
-    name: "Lando Norris",
-    team: "McLaren",
+    slug: "lando-norris",
+    firstName: "Lando",
+    lastName: "Norris",
     number: "4",
-    country: "United Kingdom",
-    accent: "#ff7a18",
-    descriptor: "PAPAYA FRONT-RUNNER",
-    badge: "1x World Drivers' Champion",
-    titleYears: ["2025"],
+    nationality: "British",
+    countryCode: "GB",
+    titles: "0 WDC",
+    age: "26",
+    accent: "#ff9a16",
+    image: landoNorrisPhoto,
+    about:
+      "Lando Norris has grown into McLaren's leading force, pairing natural speed with sharper race execution as he pushes for championship contention.",
   },
   {
-    name: "Oscar Piastri",
-    team: "McLaren",
+    slug: "oscar-piastri",
+    firstName: "Oscar",
+    lastName: "Piastri",
     number: "81",
-    country: "Australia",
-    accent: "#ff7a18",
-    descriptor: "MCLAREN TITLE CHARGER",
-    badge: "Current Grid Driver",
-    titleYears: [],
+    nationality: "Australian",
+    countryCode: "AU",
+    titles: "0 WDC",
+    age: "25",
+    accent: "#ff9a16",
+    image: oscarPiastriPhoto,
+    about:
+      "Oscar Piastri is one of Formula 1's calmest young talents, blending precision and maturity with the pace to challenge at the front.",
   },
   {
-    name: "Fernando Alonso",
-    team: "Aston Martin",
-    number: "14",
-    country: "Spain",
-    accent: "#00a67e",
-    descriptor: "FORMULA 1 ICON",
-    badge: "2x World Drivers' Champion",
-    titleYears: ["2005", "2006"],
+    slug: "george-russell",
+    firstName: "George",
+    lastName: "Russell",
+    number: "63",
+    nationality: "British",
+    countryCode: "GB",
+    titles: "0 WDC",
+    age: "28",
+    accent: "#00d6ca",
+    image: georgeRussellPhoto,
+    about:
+      "George Russell leads Mercedes into its next phase, carrying the responsibility of front-running expectations with measured aggression and speed.",
   },
   {
-    name: "Lance Stroll",
-    team: "Aston Martin",
-    number: "18",
-    country: "Canada",
-    accent: "#00a67e",
-    descriptor: "ASTON MARTIN DRIVER",
-    badge: "Current Grid Driver",
-    titleYears: [],
+    slug: "kimi-antonelli",
+    firstName: "Kimi",
+    lastName: "Antonelli",
+    number: "12",
+    nationality: "Italian",
+    countryCode: "IT",
+    titles: "0 WDC",
+    age: "19",
+    accent: "#00d6ca",
+    image: kimiAntonelliPhoto,
+    about:
+      "Kimi Antonelli arrives in Formula 1 with huge expectations, carrying Mercedes-backed potential and standout junior-category promise.",
   },
   {
-    name: "Pierre Gasly",
-    team: "Alpine",
-    number: "10",
-    country: "France",
-    accent: "#ff63c3",
-    descriptor: "ALPINE TEAM LEAD",
-    badge: "Current Grid Driver",
-    titleYears: [],
-  },
-  {
-    name: "Jack Doohan",
-    team: "Alpine",
-    number: "7",
-    country: "Australia",
-    accent: "#ff63c3",
-    descriptor: "ALPINE GRID TALENT",
-    badge: "Current Grid Driver",
-    titleYears: [],
-  },
-  {
-    name: "Alex Albon",
-    team: "Williams",
+    slug: "alex-albon",
+    firstName: "Alex",
+    lastName: "Albon",
     number: "23",
-    country: "Thailand",
-    accent: "#4aa8ff",
-    descriptor: "WILLIAMS FRONTLINE DRIVER",
-    badge: "Current Grid Driver",
-    titleYears: [],
+    nationality: "Thai-British",
+    countryCode: "TH",
+    titles: "0 WDC",
+    age: "30",
+    accent: "#2e78ff",
+    image: alexAlbonPhoto,
+    about:
+      "Alex Albon has become Williams' key reference point, extracting strong performances and consistency from a team rebuilding its momentum.",
   },
   {
-    name: "Carlos Sainz",
-    team: "Williams",
+    slug: "carlos-sainz",
+    firstName: "Carlos",
+    lastName: "Sainz",
     number: "55",
-    country: "Spain",
-    accent: "#4aa8ff",
-    descriptor: "WILLIAMS RACE WINNER",
-    badge: "Current Grid Driver",
-    titleYears: [],
+    nationality: "Spanish",
+    countryCode: "ES",
+    titles: "0 WDC",
+    age: "31",
+    accent: "#2e78ff",
+    image: carlosSainzPhoto,
+    about:
+      "Carlos Sainz brings proven race-winning pedigree, technical clarity, and calm under pressure as he strengthens the Williams lineup.",
   },
   {
-    name: "Arvid Lindblad",
-    team: "RB",
-    number: "27",
-    country: "United Kingdom",
-    accent: "#7c8cff",
-    descriptor: "RB YOUNG PROSPECT",
-    badge: "Current Grid Driver",
-    titleYears: [],
-  },
-  {
-    name: "Liam Lawson",
-    team: "RB",
-    number: "30",
-    country: "New Zealand",
-    accent: "#7c8cff",
-    descriptor: "RB ATTACK DRIVER",
-    badge: "Current Grid Driver",
-    titleYears: [],
-  },
-  {
-    name: "Nico Hulkenberg",
-    team: "Audi",
-    number: "27",
-    country: "Germany",
-    accent: "#f44336",
-    descriptor: "AUDI EXPERIENCE CORE",
-    badge: "Current Grid Driver",
-    titleYears: [],
-  },
-  {
-    name: "Gabriel Bortoleto",
-    team: "Audi",
-    number: "5",
-    country: "Brazil",
-    accent: "#f44336",
-    descriptor: "AUDI FUTURE PROJECT",
-    badge: "Current Grid Driver",
-    titleYears: [],
-  },
-  {
-    name: "Esteban Ocon",
-    team: "Haas",
+    slug: "esteban-ocon",
+    firstName: "Esteban",
+    lastName: "Ocon",
     number: "31",
-    country: "France",
-    accent: "#f2f2f2",
-    textColor: "#111111",
-    descriptor: "HAAS LEAD DRIVER",
-    badge: "Current Grid Driver",
-    titleYears: [],
+    nationality: "French",
+    countryCode: "FR",
+    titles: "0 WDC",
+    age: "29",
+    accent: "#ff1f49",
+    image: estebanOconPhoto,
+    about:
+      "Esteban Ocon is a tough, uncompromising racer whose experience and resilience make him a strong anchor for Haas' evolving project.",
   },
   {
-    name: "Oliver Bearman",
-    team: "Haas",
+    slug: "oliver-bearman",
+    firstName: "Oliver",
+    lastName: "Bearman",
     number: "87",
-    country: "United Kingdom",
-    accent: "#f2f2f2",
-    textColor: "#111111",
-    descriptor: "HAAS BREAKOUT TALENT",
-    badge: "Current Grid Driver",
-    titleYears: [],
+    nationality: "British",
+    countryCode: "GB",
+    titles: "0 WDC",
+    age: "21",
+    accent: "#ff1f49",
+    image: oliverBearmanPhoto,
+    about:
+      "Oliver Bearman is one of the most exciting young British prospects, stepping into Formula 1 with speed, confidence, and strong Ferrari-linked credentials.",
   },
   {
-    name: "Sergio Perez",
-    team: "Cadillac",
-    number: "11",
-    country: "Mexico",
-    accent: "#8fd3ff",
-    textColor: "#06131f",
-    descriptor: "CADILLAC EXPERIENCE LEAD",
-    badge: "Current Grid Driver",
-    titleYears: [],
+    slug: "franco-colapinto",
+    firstName: "Franco",
+    lastName: "Colapinto",
+    number: "43",
+    nationality: "Argentine",
+    countryCode: "AR",
+    titles: "0 WDC",
+    age: "23",
+    accent: "#2aa7ff",
+    image: francoColapintoPhoto,
+    about:
+      "Franco Colapinto brings fresh energy and fearless attacking instincts, giving Alpine another promising young name to build around.",
   },
   {
-    name: "Valtteri Bottas",
-    team: "Cadillac",
-    number: "77",
-    country: "Finland",
-    accent: "#8fd3ff",
-    textColor: "#06131f",
-    descriptor: "CADILLAC GRID VETERAN",
-    badge: "Current Grid Driver",
-    titleYears: [],
+    slug: "pierre-gasly",
+    firstName: "Pierre",
+    lastName: "Gasly",
+    number: "10",
+    nationality: "French",
+    countryCode: "FR",
+    titles: "0 WDC",
+    age: "30",
+    accent: "#2aa7ff",
+    image: pierreGaslyPhoto,
+    about:
+      "Pierre Gasly combines experience, pace, and race-winning pedigree as a dependable lead figure within Alpine's Formula 1 effort.",
+  },
+  {
+    slug: "fernando-alonso",
+    firstName: "Fernando",
+    lastName: "Alonso",
+    number: "14",
+    nationality: "Spanish",
+    countryCode: "ES",
+    titles: "2 WDC",
+    age: "44",
+    accent: "#008e84",
+    image: fernandoAlonsoPhoto,
+    about:
+      "Fernando Alonso remains one of Formula 1's sharpest competitors, combining vast experience, race intelligence, and relentless hunger at Aston Martin.",
+  },
+  {
+    slug: "lance-stroll",
+    firstName: "Lance",
+    lastName: "Stroll",
+    number: "18",
+    nationality: "Canadian",
+    countryCode: "CA",
+    titles: "0 WDC",
+    age: "27",
+    accent: "#008e84",
+    image: lanceStrollPhoto,
+    about:
+      "Lance Stroll brings experience, strong wet-weather ability, and long-term continuity as part of Aston Martin's current driver pairing.",
   },
 ];
 
 function Drivers() {
+  const sectionRef = useRef(null);
+  const [openDriver, setOpenDriver] = useState("charles-leclerc");
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const headerItems = sectionRef.current?.querySelectorAll(".drivers-reveal");
+      const cards = sectionRef.current?.querySelectorAll(".driver-card");
+
+      if (headerItems?.length) {
+        gsap.fromTo(
+          headerItems,
+          { autoAlpha: 0, y: 42 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+            stagger: 0.14,
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 72%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      }
+
+      if (cards?.length) {
+        gsap.fromTo(
+          cards,
+          { autoAlpha: 0, y: 56 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.9,
+            ease: "power3.out",
+            stagger: 0.1,
+            scrollTrigger: {
+              trigger: ".drivers-grid",
+              start: "top 78%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="drivers-section">
-      <div className="drivers-heading">
-        <p className="drivers-kicker">The Drivers</p>
-        <h2>Formula 1 Driver Cards</h2>
-        <p>Redesigned cards with a bold profile layout for every driver on the grid.</p>
+    <section ref={sectionRef} className="drivers-section">
+      <div className="drivers-header">
+        <p className="drivers-kicker drivers-reveal">Driver Lineup</p>
+        <h2 className="drivers-title drivers-reveal">Champions, Challengers, Icons</h2>
+        <p className="drivers-copy drivers-reveal">
+          A featured look at some of the names shaping the current Formula 1 grid.
+        </p>
       </div>
 
-      <div className="drivers-row">
-        {drivers.map((driver) => (
-          <article
-            key={driver.name}
-            className="driver-card"
-            style={{
-              "--driver-accent": driver.accent,
-              "--driver-badge-text": driver.textColor || "#ffffff",
-            }}
-          >
-            <div className="driver-card-shell">
-              <div className="driver-card-hero">
-                <div className="driver-top-rails">
-                  <span></span>
-                  <span></span>
-                  <span></span>
+      <div className="drivers-grid">
+        {drivers.map((driver) => {
+          const isOpen = openDriver === driver.slug;
+
+          return (
+            <article
+              key={driver.slug}
+              className={`driver-card ${isOpen ? "driver-card-open" : ""}`}
+              style={{ "--driver-accent": driver.accent }}
+            >
+              <div className="driver-accent"></div>
+
+              <div className="driver-card-top">
+                <span className="driver-number">{driver.number}</span>
+              </div>
+
+              <div className="driver-photo-wrap">
+                <img src={driver.image} alt={driver.firstName + " " + driver.lastName} className="driver-photo" />
+              </div>
+
+              <div className="driver-info">
+                <h3>{driver.firstName}</h3>
+                <p>{driver.lastName}</p>
+              </div>
+
+              <div className="driver-stats-row">
+                <div className="driver-stat-box">
+                  <span>Nationality</span>
+                  <strong>{driver.nationality}</strong>
+                  <small>{driver.countryCode}</small>
                 </div>
 
-                <div className="driver-ghost-number">{driver.number}</div>
+                <div className="driver-stat-box">
+                  <span>Titles</span>
+                  <strong>{driver.titles}</strong>
+                </div>
 
-                <div className="driver-title-wrap">
-                  <h3>{driver.name}</h3>
-                  <p className="driver-descriptor">{driver.descriptor}</p>
+                <div className="driver-stat-box">
+                  <span>Age</span>
+                  <strong>{driver.age}</strong>
                 </div>
               </div>
 
-              <div className="driver-card-body">
-                <div className="driver-badge">{driver.badge}</div>
+              <button
+                type="button"
+                className="driver-about-toggle"
+                onClick={() => setOpenDriver((current) => (current === driver.slug ? "" : driver.slug))}
+                aria-expanded={isOpen}
+              >
+                <span>About</span>
+                <span className={`driver-toggle-arrow ${isOpen ? "driver-toggle-arrow-open" : ""}`}>
+                  v
+                </span>
+              </button>
 
-                <div className="driver-stats-grid">
-                  <div className="driver-stat-box">
-                    <strong>{driver.number}</strong>
-                    <span>Car Number</span>
-                  </div>
-
-                  <div className="driver-stat-box">
-                    <strong>{driver.country}</strong>
-                    <span>Country</span>
-                  </div>
-
-                  <div className="driver-stat-box">
-                    <strong>{driver.team}</strong>
-                    <span>Team</span>
-                  </div>
-                </div>
-
-                <div className="driver-chip-row">
-                  {driver.titleYears.length ? (
-                    driver.titleYears.map((year) => (
-                      <span key={year} className="driver-chip">
-                        {year}
-                      </span>
-                    ))
-                  ) : (
-                    <span className="driver-chip driver-chip-muted">Current Grid Driver</span>
-                  )}
-                </div>
-
-                <div className="driver-footer">
-                  <span className="driver-footer-country">{driver.country}</span>
-                  <span className="driver-footer-team">{driver.team}</span>
-                </div>
-              </div>
-            </div>
-          </article>
-        ))}
+              {isOpen && <div className="driver-about-panel">{driver.about}</div>}
+            </article>
+          );
+        })}
       </div>
     </section>
   );
